@@ -4,13 +4,13 @@ spring:
   r2dbc:
     url: r2dbc:mysql://localhost:3306/customers
     username: root
-  server:
-    servlet:
-        contextPath: /customers
-    port: 8011
+server:
+  servlet:
+    contextPath: /customers
+  port: 8011
 
 logging:
   level:
     org:
       springframework:
-        r2dbc: DEBUG
+        r2dbc: INFO
