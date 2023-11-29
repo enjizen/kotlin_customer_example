@@ -11,23 +11,17 @@ import reactor.core.publisher.Mono
     "data")
 class ResponseModel(responseEnum: ResponseEnum, dataObj: Any? = null) {
      @JsonProperty("status")
-     var responseStatus: ResponseStatus? = null
+     var status: ResponseStatus? = null
 
      @JsonProperty("data")
      var dataObj: Any? = null
 
     init {
-        responseStatus = ResponseStatus(responseEnum.code, responseEnum.message, responseEnum.description)
+        status = ResponseStatus(responseEnum.code, responseEnum.message, responseEnum.description)
         when (dataObj) {
-            is Mono<*> -> {
-                this.dataObj = dataObj.toFuture().get()
-            }
-            is Flux<*> -> {
-                this.dataObj = dataObj.collectList().toFuture().get()
-            }
-            else -> {
-                this.dataObj = dataObj
-            }
+            is Mono<*> -> this.dataObj = dataObj.toFuture().get()
+            is Flux<*> -> this.dataObj = dataObj.collectList().toFuture().get()
+            else -> this.dataObj = dataObj
         }
     }
  }

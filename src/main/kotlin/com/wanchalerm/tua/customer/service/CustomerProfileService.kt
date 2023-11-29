@@ -4,7 +4,7 @@ import com.wanchalerm.tua.customer.model.entity.CustomerProfileEntity
 import com.wanchalerm.tua.customer.model.request.CustomerRequest
 import com.wanchalerm.tua.customer.repository.CustomerProfileRepository
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.BeanUtils
@@ -18,7 +18,6 @@ class CustomerProfileService(private val customerProfileRepository: CustomerProf
     val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun create(customerRequest: CustomerRequest) : Mono<CustomerProfileEntity> {
-       logger.info("Create customer")
         CustomerProfileEntity().apply {
             BeanUtils.copyProperties(customerRequest, this)
             val currentDateTime = LocalDateTime.now()
@@ -35,9 +34,5 @@ class CustomerProfileService(private val customerProfileRepository: CustomerProf
 
     fun getAll(): Flux<CustomerProfileEntity> {
         return customerProfileRepository.findAll()
-    }
-
-    fun getByCode(code: String?): CustomerProfileEntity? {
-        return customerProfileRepository.findByCode(code)
     }
 }

@@ -7,6 +7,4 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CustomerProfileRepository : ReactiveCrudRepository<CustomerProfileEntity, Int> {
-
-    fun findByCode(code: String?): CustomerProfileEntity?
 }
