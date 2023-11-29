@@ -1,4 +1,4 @@
-package com.tua.wanchalerm.example.product.extension
+package com.wanchalerm.tua.customer.extension
 
 import java.math.BigDecimal
 
