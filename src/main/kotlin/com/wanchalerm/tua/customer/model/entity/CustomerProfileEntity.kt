@@ -3,16 +3,14 @@ package com.wanchalerm.tua.customer.model.entity
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
-import org.springframework.data.annotation.CreatedBy
-import org.springframework.data.annotation.Id
-import org.springframework.data.annotation.LastModifiedDate
-import org.springframework.data.relational.core.mapping.Column
-import org.springframework.data.relational.core.mapping.Table
 import java.io.Serializable
 import java.time.LocalDate
 import java.time.LocalDateTime
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Column
+import org.springframework.data.relational.core.mapping.Table
 
-@Table(name = "customer_profiles")
+@Table(name = "profiles")
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
  class CustomerProfileEntity : Serializable {
     @Id
@@ -37,15 +35,12 @@ import java.time.LocalDateTime
     var email: String? = null
 
     @Column("created_date_time")
-    @CreatedBy
     var createdDateTime: LocalDateTime? = null
 
     @Column("updated_date_time")
-    @LastModifiedDate
     var updatedDateTime: LocalDateTime? = null
 
     @Column("is_active")
-    @JsonProperty("is_active")
     var active: Boolean? = null
 
     @Column("is_deleted")
