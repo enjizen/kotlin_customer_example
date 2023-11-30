@@ -3,7 +3,7 @@ package com.wanchalerm.tua.customer.constant
 enum class ResponseEnum(val code: String, val message: String, val description: String) {
     SUCCESS("200", ResponseStatusConstant.SUCCESS, ResponseStatusConstant.SUCCESS),
     BAD_REQUEST("400", ResponseStatusConstant.BAD_REQUEST, ResponseStatusConstant.BAD_REQUEST),
-    DATA_NOT_FOUND("404", ResponseStatusConstant.DATA_NOT_FOUND, ResponseStatusConstant.DATA_NOT_FOUND),
+    NO_CONTENT("204", ResponseStatusConstant.NO_CONTENT, ResponseStatusConstant.NO_CONTENT),
     UNKNOWN("400", ResponseStatusConstant.BAD_REQUEST, ResponseStatusConstant.BAD_REQUEST),
     UNAUTHORIZED("401", ResponseStatusConstant.UNAUTHORIZED, ResponseStatusConstant.UNAUTHORIZED);
 

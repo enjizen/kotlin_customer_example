@@ -114,8 +114,9 @@ class GlobalException {
             }
 
             exception is WebExchangeBindException -> {
-                String.format(exception.fieldError?.rejectedValue?.let { FIELD_IS_INVALID  } ?: FIELD_IS_MISSING,
-                    exception.fieldError?.field?.camelToSnake())
+                (exception.fieldError?.rejectedValue?.let { FIELD_IS_INVALID  } ?: FIELD_IS_MISSING).let {
+                    String.format(it ,exception.fieldError?.field?.camelToSnake())
+                }
             }
 
             exception is MissingPathVariableException -> {
@@ -151,6 +152,7 @@ class GlobalException {
     @ExceptionHandler(BusinessException::class)
     @ResponseBody
     fun handleBusinessException(ex: BusinessException): Mono<ResponseEntity<ResponseStatus>> {
+        logger.error(ex.message, ex)
         return Mono.just(
             ResponseEntity.status(ex.httpStatus)
                 .header(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString())
@@ -161,6 +163,7 @@ class GlobalException {
     @ExceptionHandler(InputValidationException::class)
     @ResponseBody
     fun handleInputValidationException(ex: InputValidationException): Mono<ResponseEntity<ResponseStatus>> {
+        logger.error(ex.message, ex)
         val responseStatus = ResponseStatus(ex.code, ex.message, ex.description)
         return Mono.just(
             ResponseEntity.status(ex.httpStatus)
@@ -169,9 +172,10 @@ class GlobalException {
         )
     }
 
-    @ExceptionHandler(DataNotFoundException::class)
+    @ExceptionHandler(NoContentException::class)
     @ResponseBody
-    fun handleDataNotFoundException(ex: DataNotFoundException): Mono<ResponseEntity<ResponseStatus>> {
+    fun handleDataNotFoundException(ex: NoContentException): Mono<ResponseEntity<ResponseStatus>> {
+        logger.error(ex.message, ex)
         val responseStatus = ResponseStatus(ex.code, ex.message, ex.description)
         return Mono.just(
             ResponseEntity.status(ex.httpStatus)
